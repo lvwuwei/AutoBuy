@@ -1,0 +1,873 @@
+2020-12-19 17:16:34.831 | ERROR    | __main__:<module>:47 - An error has been caught in function '<module>', process 'MainProcess' (14836), thread 'MainThread' (9820):
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 484, in connect
+    sock = self._connect()
+           │    └ <function Connection._connect at 0x000001C63B222B70>
+           └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 541, in _connect
+    raise err
+          └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 529, in _connect
+    sock.connect(socket_address)
+    │    │       └ ('127.0.0.1', 6379)
+    │    └ <method 'connect' of '_socket.socket' objects>
+    └ <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\client.py", line 667, in execute_command
+    connection.send_command(*args)
+    │          │             └ ('ZCARD', 'proxies:universal')
+    │          └ <function Connection.send_command at 0x000001C63B222E18>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+    │    │                   │    │             └ ('ZCARD', 'proxies:universal')
+    │    │                   │    └ <function Connection.pack_command at 0x000001C63B225048>
+    │    │                   └ Connection<host=127.0.0.1,port=6379,db=0>
+    │    └ <function Connection.send_packed_command at 0x000001C63B222D90>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+    │    └ <function Connection.connect at 0x000001C63B222AE8>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+          │               │    │              └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+          │               │    └ <function Connection._error_message at 0x000001C63B222BF8>
+          │               └ Connection<host=127.0.0.1,port=6379,db=0>
+          └ <class 'redis.exceptions.ConnectionError'>
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 484, in connect
+    sock = self._connect()
+           │    └ <function Connection._connect at 0x000001C63B222B70>
+           └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 541, in _connect
+    raise err
+          └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 529, in _connect
+    sock.connect(socket_address)
+    │    │       └ ('127.0.0.1', 6379)
+    │    └ <method 'connect' of '_socket.socket' objects>
+    └ <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+> File "E:/workspace_3/AutoBuy/ProxyPool/proxypool/processors/getter.py", line 47, in <module>
+    getter.run()
+    │      └ <function Getter.run at 0x000001C63BB53AE8>
+    └ <__main__.Getter object at 0x000001C6392B8A90>
+
+  File "E:/workspace_3/AutoBuy/ProxyPool/proxypool/processors/getter.py", line 37, in run
+    if self.is_full():
+       │    └ <function Getter.is_full at 0x000001C63B83F048>
+       └ <__main__.Getter object at 0x000001C6392B8A90>
+
+  File "E:/workspace_3/AutoBuy/ProxyPool/proxypool/processors/getter.py", line 29, in is_full
+    return self.redis.count() >= PROXY_NUMBER_MAX
+           │    │     │          └ 50000
+           │    │     └ <function RedisClient.count at 0x000001C63B82DD90>
+           │    └ <proxypool.storages.redis.RedisClient object at 0x000001C6392C8B70>
+           └ <__main__.Getter object at 0x000001C6392B8A90>
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\storages\redis.py", line 104, in count
+    return self.db.zcard(REDIS_KEY)
+           │    │  │     └ 'proxies:universal'
+           │    │  └ <function StrictRedis.zcard at 0x000001C63B25A0D0>
+           │    └ StrictRedis<ConnectionPool<Connection<host=127.0.0.1,port=6379,db=0>>>
+           └ <proxypool.storages.redis.RedisClient object at 0x000001C6392C8B70>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\client.py", line 1701, in zcard
+    return self.execute_command('ZCARD', name)
+           │    │                        └ 'proxies:universal'
+           │    └ <function StrictRedis.execute_command at 0x000001C63B255B70>
+           └ StrictRedis<ConnectionPool<Connection<host=127.0.0.1,port=6379,db=0>>>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\client.py", line 673, in execute_command
+    connection.send_command(*args)
+    │          │             └ ('ZCARD', 'proxies:universal')
+    │          └ <function Connection.send_command at 0x000001C63B222E18>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+    │    │                   │    │             └ ('ZCARD', 'proxies:universal')
+    │    │                   │    └ <function Connection.pack_command at 0x000001C63B225048>
+    │    │                   └ Connection<host=127.0.0.1,port=6379,db=0>
+    │    └ <function Connection.send_packed_command at 0x000001C63B222D90>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+    │    └ <function Connection.connect at 0x000001C63B222AE8>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+          │               │    │              └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+          │               │    └ <function Connection._error_message at 0x000001C63B222BF8>
+          │               └ Connection<host=127.0.0.1,port=6379,db=0>
+          └ <class 'redis.exceptions.ConnectionError'>
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+2020-12-19 17:22:38.021 | ERROR    | __main__:<module>:47 - An error has been caught in function '<module>', process 'MainProcess' (7260), thread 'MainThread' (2916):
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 484, in connect
+    sock = self._connect()
+           │    └ <function Connection._connect at 0x00000274232ACB70>
+           └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 541, in _connect
+    raise err
+          └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 529, in _connect
+    sock.connect(socket_address)
+    │    │       └ ('127.0.0.1', 6379)
+    │    └ <method 'connect' of '_socket.socket' objects>
+    └ <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\client.py", line 667, in execute_command
+    connection.send_command(*args)
+    │          │             └ ('ZCARD', 'proxies:universal')
+    │          └ <function Connection.send_command at 0x00000274232ACE18>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+    │    │                   │    │             └ ('ZCARD', 'proxies:universal')
+    │    │                   │    └ <function Connection.pack_command at 0x00000274232B4048>
+    │    │                   └ Connection<host=127.0.0.1,port=6379,db=0>
+    │    └ <function Connection.send_packed_command at 0x00000274232ACD90>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+    │    └ <function Connection.connect at 0x00000274232ACAE8>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+          │               │    │              └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+          │               │    └ <function Connection._error_message at 0x00000274232ACBF8>
+          │               └ Connection<host=127.0.0.1,port=6379,db=0>
+          └ <class 'redis.exceptions.ConnectionError'>
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 484, in connect
+    sock = self._connect()
+           │    └ <function Connection._connect at 0x00000274232ACB70>
+           └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 541, in _connect
+    raise err
+          └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 529, in _connect
+    sock.connect(socket_address)
+    │    │       └ ('127.0.0.1', 6379)
+    │    └ <method 'connect' of '_socket.socket' objects>
+    └ <socket.socket [closed] fd=-1, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0>
+
+ConnectionRefusedError: [WinError 10061] 由于目标计算机积极拒绝，无法连接。
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+
+> File "E:/workspace_3/AutoBuy/ProxyPool/proxypool/processors/getter.py", line 47, in <module>
+    getter.run()
+    │      └ <function Getter.run at 0x0000027423BE3AE8>
+    └ <__main__.Getter object at 0x0000027421358A90>
+
+  File "E:/workspace_3/AutoBuy/ProxyPool/proxypool/processors/getter.py", line 37, in run
+    if self.is_full():
+       │    └ <function Getter.is_full at 0x00000274238CF048>
+       └ <__main__.Getter object at 0x0000027421358A90>
+
+  File "E:/workspace_3/AutoBuy/ProxyPool/proxypool/processors/getter.py", line 29, in is_full
+    return self.redis.count() >= PROXY_NUMBER_MAX
+           │    │     │          └ 50000
+           │    │     └ <function RedisClient.count at 0x00000274238BFD90>
+           │    └ <proxypool.storages.redis.RedisClient object at 0x0000027421368B70>
+           └ <__main__.Getter object at 0x0000027421358A90>
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\storages\redis.py", line 104, in count
+    return self.db.zcard(REDIS_KEY)
+           │    │  │     └ 'proxies:universal'
+           │    │  └ <function StrictRedis.zcard at 0x00000274232EA0D0>
+           │    └ StrictRedis<ConnectionPool<Connection<host=127.0.0.1,port=6379,db=0>>>
+           └ <proxypool.storages.redis.RedisClient object at 0x0000027421368B70>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\client.py", line 1701, in zcard
+    return self.execute_command('ZCARD', name)
+           │    │                        └ 'proxies:universal'
+           │    └ <function StrictRedis.execute_command at 0x00000274232E5B70>
+           └ StrictRedis<ConnectionPool<Connection<host=127.0.0.1,port=6379,db=0>>>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\client.py", line 673, in execute_command
+    connection.send_command(*args)
+    │          │             └ ('ZCARD', 'proxies:universal')
+    │          └ <function Connection.send_command at 0x00000274232ACE18>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 610, in send_command
+    self.send_packed_command(self.pack_command(*args))
+    │    │                   │    │             └ ('ZCARD', 'proxies:universal')
+    │    │                   │    └ <function Connection.pack_command at 0x00000274232B4048>
+    │    │                   └ Connection<host=127.0.0.1,port=6379,db=0>
+    │    └ <function Connection.send_packed_command at 0x00000274232ACD90>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 585, in send_packed_command
+    self.connect()
+    │    └ <function Connection.connect at 0x00000274232ACAE8>
+    └ Connection<host=127.0.0.1,port=6379,db=0>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\redis\connection.py", line 489, in connect
+    raise ConnectionError(self._error_message(e))
+          │               │    │              └ ConnectionRefusedError(10061, '由于目标计算机积极拒绝，无法连接。', None, 10061, None)
+          │               │    └ <function Connection._error_message at 0x00000274232ACBF8>
+          │               └ Connection<host=127.0.0.1,port=6379,db=0>
+          └ <class 'redis.exceptions.ConnectionError'>
+
+redis.exceptions.ConnectionError: Error 10061 connecting to 127.0.0.1:6379. 由于目标计算机积极拒绝，无法连接。.
+2020-12-21 19:01:28.801 | ERROR    | proxypool.processors.getter:run:37 - An error has been caught in function 'run', process 'Process-2' (16376), thread 'MainThread' (1256):
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+    │   └ <function raise_from at 0x0000024477F5D6A8>
+    └ <module 'urllib3.packages.six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\urllib3\\packages\\six.py'>
+  File "<string>", line 3, in raise_from
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+                       │    └ <function HTTPConnection.getresponse at 0x0000024477326AE8>
+                       └ <urllib3.connection.HTTPConnection object at 0x0000024478F2AEB8>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 1379, in getresponse
+    response.begin()
+    │        └ <function HTTPResponse.begin at 0x0000024477323D90>
+    └ <http.client.HTTPResponse object at 0x0000024478F2AF28>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 311, in begin
+    version, status, reason = self._read_status()
+                              │    └ <function HTTPResponse._read_status at 0x0000024477323D08>
+                              └ <http.client.HTTPResponse object at 0x0000024478F2AF28>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 272, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               │    │           └ 65536
+               │    └ None
+               └ <http.client.HTTPResponse object at 0x0000024478F2AF28>
+  File "E:\Anaconda3\envs\crawler\lib\socket.py", line 586, in readinto
+    return self._sock.recv_into(b)
+           │    │               └ <memory at 0x0000024478EBB4C8>
+           │    └ None
+           └ <socket.SocketIO object at 0x0000024478F2A908>
+
+socket.timeout: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+    │       └ Timeout(connect=10, read=10, total=None)
+    └ Timeout(connect=10, read=10, total=None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+    │       │                   │                 │   └ <built-in function exc_info>
+    │       │                   │                 └ <module 'sys' (built-in)>
+    │       │                   └ <urllib3.connectionpool.HTTPConnectionPool object at 0x0000024478F4E208>
+    │       └ '/'
+    └ 'GET'
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\util\retry.py", line 410, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          │   │            │       │      └ <traceback object at 0x0000024478F6D448>
+          │   │            │       └ ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)",)
+          │   │            └ ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)",)
+          │   └ <function reraise at 0x0000024477F5D620>
+          └ <module 'urllib3.packages.six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\urllib3\\packages\\six.py'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\packages\six.py", line 735, in reraise
+    raise value
+          └ None
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 677, in urlopen
+    chunked=chunked,
+    │       └ False
+    └ False
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 428, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    │    │                     │   │                  └ 10
+    │    │                     │   └ '/'
+    │    │                     └ '/'
+    │    └ <function HTTPConnectionPool._raise_timeout at 0x0000024477FAC378>
+    └ <urllib3.connectionpool.HTTPConnectionPool object at 0x0000024478F4E208>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 336, in _raise_timeout
+    self, url, "Read timed out. (read timeout=%s)" % timeout_value
+    │     │                                          └ 10
+    │     └ '/'
+    └ <urllib3.connectionpool.HTTPConnectionPool object at 0x0000024478F4E208>
+
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\spawn.py", line 105, in spawn_main
+    exitcode = _main(fd)
+               │     └ 3
+               └ <function _main at 0x0000024475704730>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\spawn.py", line 118, in _main
+    return self._bootstrap()
+           │    └ <function BaseProcess._bootstrap at 0x000002447565B620>
+           └ <Process(Process-2, started)>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\process.py", line 258, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x0000024475654D90>
+    └ <Process(Process-2, started)>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Process(Process-2, started)>
+    │    │        │    └ ()
+    │    │        └ <Process(Process-2, started)>
+    │    └ <bound method Scheduler.run_getter of <proxypool.scheduler.Scheduler object at 0x0000024478F2A160>>
+    └ <Process(Process-2, started)>
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\scheduler.py", line 48, in run_getter
+    getter.run()
+    │      └ <function Getter.run at 0x0000024478135950>
+    └ <proxypool.processors.getter.Getter object at 0x000002447564BF60>
+
+> File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\processors\getter.py", line 37, in run
+    for proxy in crawler.crawl():
+        │        │       └ <function BaseCrawler.crawl at 0x0000024478135048>
+        │        └ <public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>
+        └ Proxy(host='49.86.177.59', port='9999')
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\crawlers\base.py", line 29, in crawl
+    html = self.fetch(url)
+           │    │     └ 'http://www.xiladaili.com/'
+           │    └ <function BaseCrawler.fetch at 0x0000024478130F28>
+           └ <public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 49, in wrapped_f
+    return Retrying(*dargs, **dkw).call(f, *args, **kw)
+           │         │        │         │   │       └ {}
+           │         │        │         │   └ (<public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>, 'http://www.xiladaili.com/')
+           │         │        │         └ <function BaseCrawler.fetch at 0x0000024478130EA0>
+           │         │        └ {'stop_max_attempt_number': 3, 'retry_on_result': <function BaseCrawler.<lambda> at 0x00000244780932F0>, 'wait_fixed': 2000}
+           │         └ ()
+           └ <class 'retrying.Retrying'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 212, in call
+    raise attempt.get()
+          │       └ <function Attempt.get at 0x0000024477F309D8>
+          └ Attempts: 3, Error:
+              File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+                attempt = Attempt...
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 247, in get
+    six.reraise(self.value[0], self.value[1], self.value[2])
+    │   │       │    │         │    │         │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       │    │         │    │         └ Attempts: 3, Error:
+    │   │       │    │         │    │             File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │       │    │         │    │               attempt = Attempt...
+    │   │       │    │         │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       │    │         └ Attempts: 3, Error:
+    │   │       │    │             File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │       │    │               attempt = Attempt...
+    │   │       │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       └ Attempts: 3, Error:
+    │   │           File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │             attempt = Attempt...
+    │   └ <function reraise at 0x0000024477F21E18>
+    └ <module 'six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\six.py'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\six.py", line 703, in reraise
+    raise value
+          └ None
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    attempt = Attempt(fn(*args, **kwargs), attempt_number, False)
+    │         │       │   │       │        └ 3
+    │         │       │   │       └ {}
+    │         │       │   └ (<public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>, 'http://www.xiladaili.com/')
+    │         │       └ <function BaseCrawler.fetch at 0x0000024478130EA0>
+    │         └ <class 'retrying.Attempt'>
+    └ Attempts: 3, Error:
+        File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+          attempt = Attempt...
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\crawlers\base.py", line 15, in fetch
+    response = requests.get(url, **kwargs)
+               │        │   │      └ {'timeout': 10, 'verify': False}
+               │        │   └ 'http://www.xiladaili.com/'
+               │        └ <function get at 0x0000024478130A60>
+               └ <module 'requests' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\requests\\__init__.py'>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+           │              │    │      │         └ {'timeout': 10, 'verify': False, 'allow_redirects': True}
+           │              │    │      └ None
+           │              │    └ None
+           │              └ 'http://www.xiladaili.com/'
+           └ <function request at 0x0000024478125D90>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+           │       │       │      │       │   │      └ {'params': None, 'timeout': 10, 'verify': False, 'allow_redirects': True}
+           │       │       │      │       │   └ 'http://www.xiladaili.com/'
+           │       │       │      │       └ 'http://www.xiladaili.com/'
+           │       │       │      └ 'get'
+           │       │       └ 'get'
+           │       └ <function Session.request at 0x0000024478130268>
+           └ <requests.sessions.Session object at 0x0000024478F4EF98>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+           │    │    │       └ {'timeout': 10, 'allow_redirects': True, 'verify': False, 'proxies': OrderedDict(), 'stream': False, 'cert': None}
+           │    │    └ <PreparedRequest [GET]>
+           │    └ <function Session.send at 0x00000244781306A8>
+           └ <requests.sessions.Session object at 0x0000024478F4EF98>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+        │       │    │          └ {'timeout': 10, 'verify': False, 'proxies': OrderedDict(), 'stream': False, 'cert': None}
+        │       │    └ <PreparedRequest [GET]>
+        │       └ <function HTTPAdapter.send at 0x0000024478131B70>
+        └ <requests.adapters.HTTPAdapter object at 0x0000024478F9A470>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+          │              │       └ <PreparedRequest [GET]>
+          │              └ <PreparedRequest [GET]>
+          └ <class 'requests.exceptions.ReadTimeout'>
+
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)
+2020-12-21 19:03:48.153 | ERROR    | proxypool.processors.getter:run:37 - An error has been caught in function 'run', process 'Process-2' (16376), thread 'MainThread' (1256):
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+    │   └ <function raise_from at 0x0000024477F5D6A8>
+    └ <module 'urllib3.packages.six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\urllib3\\packages\\six.py'>
+  File "<string>", line 3, in raise_from
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+                       │    └ <function HTTPConnection.getresponse at 0x0000024477326AE8>
+                       └ <urllib3.connection.HTTPConnection object at 0x0000024479045470>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 1379, in getresponse
+    response.begin()
+    │        └ <function HTTPResponse.begin at 0x0000024477323D90>
+    └ <http.client.HTTPResponse object at 0x00000244790454E0>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 311, in begin
+    version, status, reason = self._read_status()
+                              │    └ <function HTTPResponse._read_status at 0x0000024477323D08>
+                              └ <http.client.HTTPResponse object at 0x00000244790454E0>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 272, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               │    │           └ 65536
+               │    └ None
+               └ <http.client.HTTPResponse object at 0x00000244790454E0>
+  File "E:\Anaconda3\envs\crawler\lib\socket.py", line 586, in readinto
+    return self._sock.recv_into(b)
+           │    │               └ <memory at 0x0000024478EBB7C8>
+           │    └ None
+           └ <socket.SocketIO object at 0x0000024479045550>
+
+socket.timeout: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+    │       └ Timeout(connect=10, read=10, total=None)
+    └ Timeout(connect=10, read=10, total=None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+    │       │                   │                 │   └ <built-in function exc_info>
+    │       │                   │                 └ <module 'sys' (built-in)>
+    │       │                   └ <urllib3.connectionpool.HTTPConnectionPool object at 0x00000244790450B8>
+    │       └ '/'
+    └ 'GET'
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\util\retry.py", line 410, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          │   │            │       │      └ <traceback object at 0x000002447904F308>
+          │   │            │       └ ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)",)
+          │   │            └ ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)",)
+          │   └ <function reraise at 0x0000024477F5D620>
+          └ <module 'urllib3.packages.six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\urllib3\\packages\\six.py'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\packages\six.py", line 735, in reraise
+    raise value
+          └ None
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 677, in urlopen
+    chunked=chunked,
+    │       └ False
+    └ False
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 428, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    │    │                     │   │                  └ 10
+    │    │                     │   └ '/'
+    │    │                     └ '/'
+    │    └ <function HTTPConnectionPool._raise_timeout at 0x0000024477FAC378>
+    └ <urllib3.connectionpool.HTTPConnectionPool object at 0x00000244790450B8>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 336, in _raise_timeout
+    self, url, "Read timed out. (read timeout=%s)" % timeout_value
+    │     │                                          └ 10
+    │     └ '/'
+    └ <urllib3.connectionpool.HTTPConnectionPool object at 0x00000244790450B8>
+
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\spawn.py", line 105, in spawn_main
+    exitcode = _main(fd)
+               │     └ 3
+               └ <function _main at 0x0000024475704730>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\spawn.py", line 118, in _main
+    return self._bootstrap()
+           │    └ <function BaseProcess._bootstrap at 0x000002447565B620>
+           └ <Process(Process-2, started)>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\process.py", line 258, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x0000024475654D90>
+    └ <Process(Process-2, started)>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Process(Process-2, started)>
+    │    │        │    └ ()
+    │    │        └ <Process(Process-2, started)>
+    │    └ <bound method Scheduler.run_getter of <proxypool.scheduler.Scheduler object at 0x0000024478F2A160>>
+    └ <Process(Process-2, started)>
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\scheduler.py", line 48, in run_getter
+    getter.run()
+    │      └ <function Getter.run at 0x0000024478135950>
+    └ <proxypool.processors.getter.Getter object at 0x000002447564BF60>
+
+> File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\processors\getter.py", line 37, in run
+    for proxy in crawler.crawl():
+        │        │       └ <function BaseCrawler.crawl at 0x0000024478135048>
+        │        └ <public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>
+        └ Proxy(host='49.86.177.59', port='9999')
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\crawlers\base.py", line 29, in crawl
+    html = self.fetch(url)
+           │    │     └ 'http://www.xiladaili.com/'
+           │    └ <function BaseCrawler.fetch at 0x0000024478130F28>
+           └ <public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 49, in wrapped_f
+    return Retrying(*dargs, **dkw).call(f, *args, **kw)
+           │         │        │         │   │       └ {}
+           │         │        │         │   └ (<public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>, 'http://www.xiladaili.com/')
+           │         │        │         └ <function BaseCrawler.fetch at 0x0000024478130EA0>
+           │         │        └ {'stop_max_attempt_number': 3, 'retry_on_result': <function BaseCrawler.<lambda> at 0x00000244780932F0>, 'wait_fixed': 2000}
+           │         └ ()
+           └ <class 'retrying.Retrying'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 212, in call
+    raise attempt.get()
+          │       └ <function Attempt.get at 0x0000024477F309D8>
+          └ Attempts: 3, Error:
+              File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+                attempt = Attempt...
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 247, in get
+    six.reraise(self.value[0], self.value[1], self.value[2])
+    │   │       │    │         │    │         │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       │    │         │    │         └ Attempts: 3, Error:
+    │   │       │    │         │    │             File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │       │    │         │    │               attempt = Attempt...
+    │   │       │    │         │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       │    │         └ Attempts: 3, Error:
+    │   │       │    │             File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │       │    │               attempt = Attempt...
+    │   │       │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       └ Attempts: 3, Error:
+    │   │           File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │             attempt = Attempt...
+    │   └ <function reraise at 0x0000024477F21E18>
+    └ <module 'six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\six.py'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\six.py", line 703, in reraise
+    raise value
+          └ None
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    attempt = Attempt(fn(*args, **kwargs), attempt_number, False)
+    │         │       │   │       │        └ 3
+    │         │       │   │       └ {}
+    │         │       │   └ (<public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>, 'http://www.xiladaili.com/')
+    │         │       └ <function BaseCrawler.fetch at 0x0000024478130EA0>
+    │         └ <class 'retrying.Attempt'>
+    └ Attempts: 3, Error:
+        File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+          attempt = Attempt...
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\crawlers\base.py", line 15, in fetch
+    response = requests.get(url, **kwargs)
+               │        │   │      └ {'timeout': 10, 'verify': False}
+               │        │   └ 'http://www.xiladaili.com/'
+               │        └ <function get at 0x0000024478130A60>
+               └ <module 'requests' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\requests\\__init__.py'>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+           │              │    │      │         └ {'timeout': 10, 'verify': False, 'allow_redirects': True}
+           │              │    │      └ None
+           │              │    └ None
+           │              └ 'http://www.xiladaili.com/'
+           └ <function request at 0x0000024478125D90>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+           │       │       │      │       │   │      └ {'params': None, 'timeout': 10, 'verify': False, 'allow_redirects': True}
+           │       │       │      │       │   └ 'http://www.xiladaili.com/'
+           │       │       │      │       └ 'http://www.xiladaili.com/'
+           │       │       │      └ 'get'
+           │       │       └ 'get'
+           │       └ <function Session.request at 0x0000024478130268>
+           └ <requests.sessions.Session object at 0x00000244790412E8>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+           │    │    │       └ {'timeout': 10, 'allow_redirects': True, 'verify': False, 'proxies': OrderedDict(), 'stream': False, 'cert': None}
+           │    │    └ <PreparedRequest [GET]>
+           │    └ <function Session.send at 0x00000244781306A8>
+           └ <requests.sessions.Session object at 0x00000244790412E8>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+        │       │    │          └ {'timeout': 10, 'verify': False, 'proxies': OrderedDict(), 'stream': False, 'cert': None}
+        │       │    └ <PreparedRequest [GET]>
+        │       └ <function HTTPAdapter.send at 0x0000024478131B70>
+        └ <requests.adapters.HTTPAdapter object at 0x0000024479041F28>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+          │              │       └ <PreparedRequest [GET]>
+          │              └ <PreparedRequest [GET]>
+          └ <class 'requests.exceptions.ReadTimeout'>
+
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)
+2020-12-21 19:14:41.454 | ERROR    | proxypool.processors.getter:run:37 - An error has been caught in function 'run', process 'Process-2' (16376), thread 'MainThread' (1256):
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 426, in _make_request
+    six.raise_from(e, None)
+    │   └ <function raise_from at 0x0000024477F5D6A8>
+    └ <module 'urllib3.packages.six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\urllib3\\packages\\six.py'>
+  File "<string>", line 3, in raise_from
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 421, in _make_request
+    httplib_response = conn.getresponse()
+                       │    └ <function HTTPConnection.getresponse at 0x0000024477326AE8>
+                       └ <urllib3.connection.HTTPConnection object at 0x000002447905EBA8>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 1379, in getresponse
+    response.begin()
+    │        └ <function HTTPResponse.begin at 0x0000024477323D90>
+    └ <http.client.HTTPResponse object at 0x000002447905EC18>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 311, in begin
+    version, status, reason = self._read_status()
+                              │    └ <function HTTPResponse._read_status at 0x0000024477323D08>
+                              └ <http.client.HTTPResponse object at 0x000002447905EC18>
+  File "E:\Anaconda3\envs\crawler\lib\http\client.py", line 272, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               │    │           └ 65536
+               │    └ None
+               └ <http.client.HTTPResponse object at 0x000002447905EC18>
+  File "E:\Anaconda3\envs\crawler\lib\socket.py", line 586, in readinto
+    return self._sock.recv_into(b)
+           │    │               └ <memory at 0x0000024478EBBA08>
+           │    └ None
+           └ <socket.SocketIO object at 0x000002447905EC88>
+
+socket.timeout: timed out
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\adapters.py", line 449, in send
+    timeout=timeout
+    │       └ Timeout(connect=10, read=10, total=None)
+    └ Timeout(connect=10, read=10, total=None)
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 727, in urlopen
+    method, url, error=e, _pool=self, _stacktrace=sys.exc_info()[2]
+    │       │                   │                 │   └ <built-in function exc_info>
+    │       │                   │                 └ <module 'sys' (built-in)>
+    │       │                   └ <urllib3.connectionpool.HTTPConnectionPool object at 0x000002447905E898>
+    │       └ '/'
+    └ 'GET'
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\util\retry.py", line 410, in increment
+    raise six.reraise(type(error), error, _stacktrace)
+          │   │            │       │      └ <traceback object at 0x00000244790514C8>
+          │   │            │       └ ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)",)
+          │   │            └ ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)",)
+          │   └ <function reraise at 0x0000024477F5D620>
+          └ <module 'urllib3.packages.six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\urllib3\\packages\\six.py'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\packages\six.py", line 735, in reraise
+    raise value
+          └ None
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 677, in urlopen
+    chunked=chunked,
+    │       └ False
+    └ False
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 428, in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+    │    │                     │   │                  └ 10
+    │    │                     │   └ '/'
+    │    │                     └ '/'
+    │    └ <function HTTPConnectionPool._raise_timeout at 0x0000024477FAC378>
+    └ <urllib3.connectionpool.HTTPConnectionPool object at 0x000002447905E898>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\urllib3\connectionpool.py", line 336, in _raise_timeout
+    self, url, "Read timed out. (read timeout=%s)" % timeout_value
+    │     │                                          └ 10
+    │     └ '/'
+    └ <urllib3.connectionpool.HTTPConnectionPool object at 0x000002447905E898>
+
+urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)
+
+
+During handling of the above exception, another exception occurred:
+
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\spawn.py", line 105, in spawn_main
+    exitcode = _main(fd)
+               │     └ 3
+               └ <function _main at 0x0000024475704730>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\spawn.py", line 118, in _main
+    return self._bootstrap()
+           │    └ <function BaseProcess._bootstrap at 0x000002447565B620>
+           └ <Process(Process-2, started)>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\process.py", line 258, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x0000024475654D90>
+    └ <Process(Process-2, started)>
+  File "E:\Anaconda3\envs\crawler\lib\multiprocessing\process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <Process(Process-2, started)>
+    │    │        │    └ ()
+    │    │        └ <Process(Process-2, started)>
+    │    └ <bound method Scheduler.run_getter of <proxypool.scheduler.Scheduler object at 0x0000024478F2A160>>
+    └ <Process(Process-2, started)>
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\scheduler.py", line 48, in run_getter
+    getter.run()
+    │      └ <function Getter.run at 0x0000024478135950>
+    └ <proxypool.processors.getter.Getter object at 0x000002447564BF60>
+
+> File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\processors\getter.py", line 37, in run
+    for proxy in crawler.crawl():
+        │        │       └ <function BaseCrawler.crawl at 0x0000024478135048>
+        │        └ <public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>
+        └ Proxy(host='49.86.177.59', port='9999')
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\crawlers\base.py", line 29, in crawl
+    html = self.fetch(url)
+           │    │     └ 'http://www.xiladaili.com/'
+           │    └ <function BaseCrawler.fetch at 0x0000024478130F28>
+           └ <public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 49, in wrapped_f
+    return Retrying(*dargs, **dkw).call(f, *args, **kw)
+           │         │        │         │   │       └ {}
+           │         │        │         │   └ (<public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>, 'http://www.xiladaili.com/')
+           │         │        │         └ <function BaseCrawler.fetch at 0x0000024478130EA0>
+           │         │        └ {'stop_max_attempt_number': 3, 'retry_on_result': <function BaseCrawler.<lambda> at 0x00000244780932F0>, 'wait_fixed': 2000}
+           │         └ ()
+           └ <class 'retrying.Retrying'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 212, in call
+    raise attempt.get()
+          │       └ <function Attempt.get at 0x0000024477F309D8>
+          └ Attempts: 3, Error:
+              File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+                attempt = Attempt...
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 247, in get
+    six.reraise(self.value[0], self.value[1], self.value[2])
+    │   │       │    │         │    │         │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       │    │         │    │         └ Attempts: 3, Error:
+    │   │       │    │         │    │             File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │       │    │         │    │               attempt = Attempt...
+    │   │       │    │         │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       │    │         └ Attempts: 3, Error:
+    │   │       │    │             File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │       │    │               attempt = Attempt...
+    │   │       │    └ (<class 'requests.exceptions.ReadTimeout'>, ReadTimeout(ReadTimeoutError("HTTPConnectionPool(host='www.xiladaili.com', port=8...
+    │   │       └ Attempts: 3, Error:
+    │   │           File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    │   │             attempt = Attempt...
+    │   └ <function reraise at 0x0000024477F21E18>
+    └ <module 'six' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\six.py'>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\six.py", line 703, in reraise
+    raise value
+          └ None
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+    attempt = Attempt(fn(*args, **kwargs), attempt_number, False)
+    │         │       │   │       │        └ 3
+    │         │       │   │       └ {}
+    │         │       │   └ (<public.xiladaili.XiladailiCrawler object at 0x0000024478F2A390>, 'http://www.xiladaili.com/')
+    │         │       └ <function BaseCrawler.fetch at 0x0000024478130EA0>
+    │         └ <class 'retrying.Attempt'>
+    └ Attempts: 3, Error:
+        File "E:\Anaconda3\envs\crawler\lib\site-packages\retrying.py", line 200, in call
+          attempt = Attempt...
+
+  File "E:\workspace_3\AutoBuy\ProxyPool\proxypool\crawlers\base.py", line 15, in fetch
+    response = requests.get(url, **kwargs)
+               │        │   │      └ {'timeout': 10, 'verify': False}
+               │        │   └ 'http://www.xiladaili.com/'
+               │        └ <function get at 0x0000024478130A60>
+               └ <module 'requests' from 'E:\\Anaconda3\\envs\\crawler\\lib\\site-packages\\requests\\__init__.py'>
+
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\api.py", line 75, in get
+    return request('get', url, params=params, **kwargs)
+           │              │    │      │         └ {'timeout': 10, 'verify': False, 'allow_redirects': True}
+           │              │    │      └ None
+           │              │    └ None
+           │              └ 'http://www.xiladaili.com/'
+           └ <function request at 0x0000024478125D90>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\api.py", line 60, in request
+    return session.request(method=method, url=url, **kwargs)
+           │       │       │      │       │   │      └ {'params': None, 'timeout': 10, 'verify': False, 'allow_redirects': True}
+           │       │       │      │       │   └ 'http://www.xiladaili.com/'
+           │       │       │      │       └ 'http://www.xiladaili.com/'
+           │       │       │      └ 'get'
+           │       │       └ 'get'
+           │       └ <function Session.request at 0x0000024478130268>
+           └ <requests.sessions.Session object at 0x000002447903F630>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\sessions.py", line 533, in request
+    resp = self.send(prep, **send_kwargs)
+           │    │    │       └ {'timeout': 10, 'allow_redirects': True, 'verify': False, 'proxies': OrderedDict(), 'stream': False, 'cert': None}
+           │    │    └ <PreparedRequest [GET]>
+           │    └ <function Session.send at 0x00000244781306A8>
+           └ <requests.sessions.Session object at 0x000002447903F630>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\sessions.py", line 646, in send
+    r = adapter.send(request, **kwargs)
+        │       │    │          └ {'timeout': 10, 'verify': False, 'proxies': OrderedDict(), 'stream': False, 'cert': None}
+        │       │    └ <PreparedRequest [GET]>
+        │       └ <function HTTPAdapter.send at 0x0000024478131B70>
+        └ <requests.adapters.HTTPAdapter object at 0x000002447905E358>
+  File "E:\Anaconda3\envs\crawler\lib\site-packages\requests\adapters.py", line 529, in send
+    raise ReadTimeout(e, request=request)
+          │              │       └ <PreparedRequest [GET]>
+          │              └ <PreparedRequest [GET]>
+          └ <class 'requests.exceptions.ReadTimeout'>
+
+requests.exceptions.ReadTimeout: HTTPConnectionPool(host='www.xiladaili.com', port=80): Read timed out. (read timeout=10)

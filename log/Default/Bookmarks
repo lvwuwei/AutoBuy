@@ -1,0 +1,40 @@
+{
+   "checksum": "aae9365e2666df1ab35d9a4c97c44909",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13253169058743523",
+            "guid": "4145526b-fab5-4a7e-935d-9b1e015efe10",
+            "id": "5",
+            "name": "新标签页",
+            "type": "url",
+            "url": "chrome://newtab/"
+         } ],
+         "date_added": "13253168981082932",
+         "date_modified": "13253169058743523",
+         "guid": "00000000-0000-4000-a000-000000000002",
+         "id": "1",
+         "name": "书签栏",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13253168981082935",
+         "date_modified": "0",
+         "guid": "00000000-0000-4000-a000-000000000003",
+         "id": "2",
+         "name": "其他书签",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13253168981082936",
+         "date_modified": "0",
+         "guid": "00000000-0000-4000-a000-000000000004",
+         "id": "3",
+         "name": "移动设备书签",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}
